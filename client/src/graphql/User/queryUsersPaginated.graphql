@@ -1,0 +1,13 @@
+#import "./fragmentUserForList.graphql"
+#import "../fragmentMeta.graphql"
+
+query($page: Int, $pageSize: Int, $sorted: [RTSort], $filtered: [RTFilter]) {
+	usersPaginated(page: $page, pageSize: $pageSize, sorted: $sorted, filtered: $filtered) {
+		docs {
+			...fragmentUserForList
+		}
+		meta {
+			...fragmentMeta
+		}
+	}
+}

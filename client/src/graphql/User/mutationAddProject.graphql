@@ -1,0 +1,7 @@
+#import "./fragmentUserFull.graphql"
+
+mutation addProject($userId: ID!, $projectId: ID!, $role: String!) {
+	userAddProject(userId: $userId, projectId: $projectId, role: $role) {
+		...fragmentUserFull
+	}
+}

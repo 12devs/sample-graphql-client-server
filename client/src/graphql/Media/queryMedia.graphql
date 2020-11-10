@@ -1,0 +1,7 @@
+#import "./fragmentMediaFull.graphql"
+
+query getMedia($id: ID!) {
+	media(id: $id) {
+		...fragmentMediaFull
+	}
+}

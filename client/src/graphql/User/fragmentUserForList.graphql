@@ -1,0 +1,8 @@
+fragment fragmentUserForList on User {
+	_id
+	name
+	email
+	status
+	isAdmin
+	createdAt
+}

@@ -1,0 +1,6 @@
+fragment fragmentMeta on RTMeta {
+	page
+	pages
+	pageSize
+	total
+}

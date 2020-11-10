@@ -1,0 +1,11 @@
+fragment fragmentMediaFull on Media {
+	_id
+	externalId
+	contentHeadline
+	services
+	sentiment {
+		magnitude
+		score
+	}
+	createdAt
+}

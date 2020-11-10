@@ -1,0 +1,7 @@
+#import "./fragmentUserForList.graphql"
+
+query {
+	users {
+		...fragmentUserForList
+	}
+}

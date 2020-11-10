@@ -1,0 +1,7 @@
+#import "./fragmentUserForList.graphql"
+
+query($projectId: ID!) {
+	usersByProject(projectId: $projectId) {
+		...fragmentUserForList
+	}
+}

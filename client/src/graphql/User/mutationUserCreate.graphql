@@ -1,0 +1,7 @@
+#import "./fragmentUserFull.graphql"
+
+mutation userCreate($data: InputUser!) {
+	userCreate(data: $data) {
+		...fragmentUserFull
+	}
+}

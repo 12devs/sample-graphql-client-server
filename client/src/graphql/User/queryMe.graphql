@@ -1,0 +1,8 @@
+#import "./fragmentUserFull.graphql"
+
+query getMe {
+	me {
+		...fragmentUserFull
+	}
+}
+

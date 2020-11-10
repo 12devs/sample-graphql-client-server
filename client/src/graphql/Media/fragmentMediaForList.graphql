@@ -1,0 +1,28 @@
+fragment fragmentMediaForList on Media {
+	_id
+	mediapageLink
+	link
+	contentHeadline
+	author {
+		_id
+		name
+		originalName
+	}
+	projects {
+		_id
+		name
+	}
+	externalId
+	mediaType
+	publicationName
+	publicationDate
+	importDate
+	hasGoogleNlp
+	hasAmazon
+	hasAzure
+	sentiment {
+		magnitude
+		score
+	}
+	createdAt
+}

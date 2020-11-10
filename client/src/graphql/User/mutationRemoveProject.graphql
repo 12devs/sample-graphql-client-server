@@ -1,0 +1,7 @@
+#import "./fragmentUserFull.graphql"
+
+mutation removeProject($userId: ID!, $projectId: ID!) {
+	userRemoveProject(userId: $userId, projectId: $projectId) {
+		...fragmentUserFull
+	}
+}

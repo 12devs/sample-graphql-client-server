@@ -1,0 +1,71 @@
+version: "2"
+services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+  lmax-node:
+    build: .
+    depends_on:
+      - mongodb
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./client/assets:/app/client/assets
+      - ./client/src:/app/client/src
+    environment:
+      DATABASE_HOST: mongodb
+      MONGODB: ${MONGODB}
+      PORT: ${PORT}
+      JWT_SECRET: ${JWT_SECRET}
+      VIRTUAL_HOST: ${VIRTUAL_HOST}
+      VIRTUAL_PORT: "3000"
+  mongodb:
+    image: 'bitnami/mongodb:latest'
+    ports:
+      - "27017:27017"
+    restart: always
+    environment:
+      - MONGODB_ROOT_PASSWORD=${MONGODB_ROOT_PASSWORD}
+      - MONGODB_USERNAME=${MONGODB_USERNAME}
+      - MONGODB_PASSWORD=${MONGODB_PASSWORD}
+      - MONGODB_DATABASE=${MONGODB_DATABASE}
+    # volumes:
+      # - /Users/joe/Downloads:/backup
+      # - data:/var/lib/mysql
+    #  - /home/lmax/data/mongodb:/bitnami
+  mongo-seed:
+    build: ./mongo-seed
+    environment:
+      - mongodb_username=${MONGODB_USERNAME}
+      - mongodb_password=${MONGODB_PASSWORD}
+    links:
+      - mongodb
+  db-backup:
+    container_name: db-backup
+    image: tiredofit/db-backup
+    restart: always
+    links:
+     - mongodb
+    volumes:
+     - /home/lmac/data:/data
+    environment:
+      - DB_TYPE=mongo
+      - DB_HOST=mongodb
+      - DB_DUMP_TARGET=/data
+      - DB_NAME=${MONGODB_DATABASE}
+      - DB_USER=${MONGODB_USERNAME}
+      - DB_PASS=${MONGODB_PASSWORD}
+      - DB_DUMP_FREQ=1440
+      - DB_DUMP_BEGIN=+2
+      - DB_DUMP_DEBUG=true
+      - DB_CLEANUP_TIME=10080
+      - MD5=FALSE
+      - SPLIT_DB=FALSE
+volumes:
+  data:
+    driver: "local"

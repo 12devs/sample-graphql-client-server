@@ -1,0 +1,15 @@
+fragment fragmentUserFull on User {
+	_id
+	name
+	email
+	status
+	isAdmin
+	projects {
+		role
+		project {
+			_id
+			name
+		}
+	}
+	createdAt
+}

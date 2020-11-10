@@ -1,0 +1,13 @@
+#import "./fragmentMediaForList.graphql"
+#import "../fragmentMeta.graphql"
+
+query($page: Int, $pageSize: Int, $sorted: [RTSort], $filtered: [RTFilter]) {
+	medias(page: $page, pageSize: $pageSize, sorted: $sorted, filtered: $filtered) {
+		docs {
+			...fragmentMediaForList
+		}
+		meta {
+			...fragmentMeta
+		}
+	}
+}

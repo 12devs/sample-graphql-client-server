@@ -1,0 +1,15 @@
+fragment fragmentMe on User {
+	_id
+	name
+	email
+	status
+	isAdmin
+	projects {
+		project {
+			_id
+			name
+		}
+		role
+	}
+	createdAt
+}
